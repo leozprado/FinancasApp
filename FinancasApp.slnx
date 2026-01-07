@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/1 - Presentation/" />
+  <Folder Name="/2 - Application/">
+    <Project Path="FinancasApp.API/FinancasApp.API.csproj" />
+  </Folder>
+  <Folder Name="/3 - Domain/">
+    <Project Path="FinancasApp.Domain/FinancasApp.Domain.csproj" />
+  </Folder>
+  <Folder Name="/4 - Infrastructure/">
+    <Project Path="FinancasApp.Infra.Data/FinancasApp.Infra.Data.csproj" />
+  </Folder>
+  <Folder Name="/5 - Tests/" />
+  <Folder Name="/Itens de Solução/">
+    <File Path="docker-compose.yml" />
+  </Folder>
+</Solution>
