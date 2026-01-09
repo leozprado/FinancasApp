@@ -15,7 +15,7 @@ namespace FinancasApp.Infra.Data.Contexts
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //String de conexão do banco de dados
-            optionsBuilder.UseSqlServer("");
+            optionsBuilder.UseSqlServer("Data Source=localhost,1434;Initial Catalog=master;User ID=sa;Password=Coti@2025;Encrypt=False");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
