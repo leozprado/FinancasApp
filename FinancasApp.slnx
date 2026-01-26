@@ -1,5 +1,7 @@
 <Solution>
-  <Folder Name="/1 - Presentation/" />
+  <Folder Name="/1 - Presentation/">
+    <Project Path="FinancasApp.WEB/FinancasApp.WEB.csproj" Id="b0aa612f-9b6a-4446-a95d-86309b1bc4cd" />
+  </Folder>
   <Folder Name="/2 - Application/">
     <Project Path="FinancasApp.API/FinancasApp.API.csproj" />
   </Folder>

@@ -1,26 +1,53 @@
+using FinancasApp.Domain.Interfaces.Repositories;
+using FinancasApp.Domain.Interfaces.Services;
+using FinancasApp.Domain.Services;
+using FinancasApp.Infra.Data.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-// Configurar o Swagger
+//Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//Configuração de injeções de dependência
+builder.Services.AddTransient<ICategoriaService, CategoriaService>();
+builder.Services.AddTransient<IMovimentacaoService, MovimentacaoService>();
+builder.Services.AddTransient<ICategoriaRepository, CategoriaRepository>();
+builder.Services.AddTransient<IMovimentacaoRepository, MovimentacaoRepository>();
+
+//Configuração para permitir que quaisquer aplicações
+//façam requisições para a nossa API
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("DefaultPolicy", policy =>
+    {
+        policy.AllowAnyOrigin() //permissão para qualquer origem
+              .AllowAnyMethod() //permissão para qualquer método HTTP
+              .AllowAnyHeader(); //permissão para qualquer cabeçalho
+    });
+});
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi(); 
+    app.MapOpenApi();
 }
 
-// Habilitar middleware do Swagger
+//Swagger
 app.UseSwagger();
 app.UseSwaggerUI();
+
+//Cors
+app.UseCors("DefaultPolicy");
 
 app.UseAuthorization();
 
