@@ -1,5 +1,7 @@
 <Solution>
-  <Folder Name="/1 - Presentation/" />
+  <Folder Name="/1 - Presentation/">
+    <Project Path="FinancasApp.WEB/FinancasApp.WEB.csproj" Id="b0aa612f-9b6a-4446-a95d-86309b1bc4cd" />
+  </Folder>
   <Folder Name="/2 - Application/">
     <Project Path="FinancasApp.API/FinancasApp.API.csproj" />
   </Folder>
@@ -8,6 +10,7 @@
   </Folder>
   <Folder Name="/4 - Infrastructure/">
     <Project Path="FinancasApp.Infra.Data/FinancasApp.Infra.Data.csproj" />
+    <Project Path="FinancasApp.infra.Messages/FinancasApp.infra.Messages.csproj" Id="b1b6ca8e-f547-4cc1-bcbd-49bdda68982a" />
   </Folder>
   <Folder Name="/5 - Tests/" />
   <Folder Name="/Itens de Solução/">
