@@ -51,7 +51,37 @@ namespace FinancasApp.Domain.Services
 
         public MovimentacaoResponseDTO Alterar(Guid id, MovimentacaoRequestDTO request)
         {
-            throw new NotImplementedException();
+            //Obter a movimentação do banco de dados
+            var movimentacao = movimentacaoRepository.GetById(id);
+
+            //Verificar se a movimentação foi encontrada
+            if (movimentacao == null)
+                throw new ApplicationException("Movimentação não encontrada.");
+
+            //atualizando os dados da movimentação
+            movimentacao.Nome = request.Nome;
+            movimentacao.Data = request.Data;
+            movimentacao.Valor = request.Valor;
+            movimentacao.Tipo = (TipoMovimentacao)request.Tipo;
+            movimentacao.CategoriaId = request.CategoriaId;
+           
+            movimentacaoRepository.Update(movimentacao); //Salvar as alterações no banco de dados
+
+            //Buscar novamente com Include através do repositório
+            var movimentacaoAtualizada = movimentacaoRepository.GetByIdWithCategoria(id);
+
+            var response = new MovimentacaoResponseDTO
+  (
+      movimentacaoAtualizada.Id,
+      movimentacaoAtualizada.Nome,
+      movimentacaoAtualizada.Data,
+      movimentacaoAtualizada.Valor,
+      movimentacaoAtualizada.Tipo.ToString(),
+      new CategoriaResponseDTO(movimentacaoAtualizada.Categoria.Id, movimentacaoAtualizada.Categoria.Nome)
+  );
+
+            return response; //retornar a resposta
+
         }
 
         public MovimentacaoResponseDTO Excluir(Guid id)
@@ -66,12 +96,12 @@ namespace FinancasApp.Domain.Services
 
         public MovimentacaoResponseDTO? ObterPorId(Guid id)
         {
-            //Obter a categoria do banco de dados
+            //Obter a movimentação do banco de dados
             var movimentacao = movimentacaoRepository.GetById(id);
 
             //Verificar se a categoria foi encontrada
             if (movimentacao == null)
-                return null; //Retornar nulo se não encontrada
+                throw new ApplicationException("Movimentação não encontrada."); // Lançar exceção
 
             var response = new MovimentacaoResponseDTO
             (

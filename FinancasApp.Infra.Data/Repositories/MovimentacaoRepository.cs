@@ -25,5 +25,16 @@ namespace FinancasApp.Infra.Data.Repositories
                         .ToList(); //Retorna a lista de movimentações
             }
         }
+
+        public Movimentacao? GetByIdWithCategoria(Guid id)
+        {
+            using (var dataContext = new DataContext())
+            {
+                return dataContext
+                    .Set<Movimentacao>()
+                    .Include(m => m.Categoria)
+                    .FirstOrDefault(m => m.Id == id);
+            }
+        }
     }
 }

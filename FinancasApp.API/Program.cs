@@ -2,6 +2,7 @@ using FinancasApp.Domain.Interfaces.Messages;
 using FinancasApp.Domain.Interfaces.Repositories;
 using FinancasApp.Domain.Interfaces.Services;
 using FinancasApp.Domain.Services;
+using FinancasApp.infra.Messages.Consumers;
 using FinancasApp.Infra.Data.Repositories;
 using FinancasApp.Infra.Messages.Producers;
 
@@ -24,6 +25,10 @@ builder.Services.AddTransient<IMovimentacaoService, MovimentacaoService>();
 builder.Services.AddTransient<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddTransient<IMovimentacaoRepository, MovimentacaoRepository>();
 builder.Services.AddTransient<IMessageProducer, RabbitMQProducer>(); // a segunda é a classe que implementa a interface
+
+
+//Ativar o Consumer da mensageria
+builder.Services.AddHostedService<RabbitMQConsumer>();
 
 //Configuração para permitir que quaisquer aplicações
 //façam requisições para a nossa API

@@ -11,5 +11,6 @@ namespace FinancasApp.Domain.Interfaces.Repositories
     public interface IMovimentacaoRepository : IBaseRepository<Movimentacao>
     {
         List<Movimentacao> GetByDatas(DateTime dataMin, DateTime dataMax);
+        Movimentacao? GetByIdWithCategoria(Guid id);
     }
 }
